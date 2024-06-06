@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIERRE FANCOIS - Registro</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="assets/styles/create_acount.css">
+</head>
+
+<body>
+<div class="registro">
+    <button class="cerrar-btn" onclick="cerrarRegistro()"><i class='bx bx-x'></i></button>
+    <form action="" onsubmit="enviarFormulario(event)">
+        <h1>Registro</h1>
+        <div class="input-box">
+            <input type="text" placeholder="Username" required>
+            <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box">
+            <input type="email" placeholder="Email" required>
+            <i class='bx bx-envelope'></i>
+        </div>
+        <div class="input-box">
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <i class='bx bxs-lock-alt' id="togglePassword"></i>
+        </div>
+        <div class="input-box">
+            <input type="password" id="confirmPassword" placeholder="Repetir contraseña" required>
+            <i class='bx bx-show' id="toggleConfirmPassword"></i>
+        </div>
+        <p id="errorMessage" style="color: red; display: none;">Las contraseñas no son iguales. Intente otra vez, por favor.</p>
+        </br>
+        <div class="recordar">
+            <label><input type="checkbox">Acepto los términos y condiciones</label>
+        </div>
+        <button type="submit" class="btn">Registrarse</button>
+        <div class="link">
+            <p>¿Ya tiene una cuenta? <a href="index.html">Login</a></p>
+        </div>
+    </form>
+</div>
+
+<script>
+    function cerrarRegistro() {
+        window.location.href = "index.html";
+    }
+
+    function enviarFormulario(event) {
+        event.preventDefault(); // Evita el envío tradicional del formulario
+        alert("Creado exitosamente");
+        // Aquí puedes agregar código adicional para enviar los datos del formulario al servidor si es necesario
+    }
+
+    // Resto de tu código JavaScript aquí...
+    function cerrarRegistro() {
+        window.location.href = "index.html";
+    }
+    // Función para cambiar la visibilidad de la contraseña
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        var passwordInput = document.getElementById('password');
+        var passwordIcon = document.getElementById('togglePassword');
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordIcon.classList.remove('bxs-lock-alt');
+            passwordIcon.classList.add('bxs-lock-open');
+        } else {
+            passwordInput.type = "password";
+            passwordIcon.classList.remove('bxs-lock-open');
+            passwordIcon.classList.add('bxs-lock-alt');
+        }
+    });
+
+    // Función para cambiar la visibilidad de la confirmación de contraseña
+    document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+        var confirmPasswordInput = document.getElementById('confirmPassword');
+        var confirmPasswordIcon = document.getElementById('toggleConfirmPassword');
+        if (confirmPasswordInput.type === "password") {
+            confirmPasswordInput.type = "text";
+            confirmPasswordIcon.classList.remove('bx-show');
+            confirmPasswordIcon.classList.add('bx-hide');
+        } else {
+            confirmPasswordInput.type = "password";
+            confirmPasswordIcon.classList.remove('bx-hide');
+            confirmPasswordIcon.classList.add('bx-show');
+        }
+    });
+
+    // Verificar si las contraseñas coinciden
+    document.getElementById('confirmPassword').addEventListener('keyup', function() {
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+        var errorMessage = document.getElementById('errorMessage');
+        var registerButton = document.querySelector('.btn');
+
+        if (password !== confirmPassword) {
+            errorMessage.style.display = "block";
+            registerButton.disabled = true;
+        } else {
+            errorMessage.style.display = "none";
+            registerButton.disabled = false;
+        }
+    });
+
+</script>
+</body>
+</html>
+
